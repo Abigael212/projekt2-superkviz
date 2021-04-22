@@ -36,7 +36,7 @@ h1 {
 .kviz,
 .vysledek {
 	margin: 30px auto;
-	padding: 50px;
+	padding: 20px;
 	width: 800px;
 	min-height: 400px;
 	background-color: white;
@@ -54,7 +54,7 @@ h1 {
 }
 
 #otazka {
-	margin: 20px 0 30px 0;
+	margin: 20px 0 20px 0;
 	font-size: 36px;
 	line-height: 1.2;
 	text-align: center;
@@ -73,10 +73,11 @@ h1 {
 
 #obrazek {
 	padding: 5px;
-	width: 100%;
+	width: 30%;
 	height: auto;
 	border-radius: 50%;
-	border: 3px dotted var(--cervena);
+	border: 4px dotted var(--cervena);
+	float:left;
 }
 
 #moznosti {
@@ -86,8 +87,9 @@ h1 {
 #odpovedi {
 	margin: 0;
 	padding: 0;
-	font-size: 24px;
+	font-size: 20px;
 	list-style: none;
+	float:right
 }
 
 #odpovedi li {
