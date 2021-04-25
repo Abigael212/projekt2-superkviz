@@ -1,15 +1,27 @@
 let questions = [
     {
-        question: "hejheHHH1?",
-        photo: 'obrazky/moncicak.jpg',
-        answers: ["correct1", "b", "c", "g"],
+        question: "Ktorý z týchto superhrdinov nepatrí medzi ostatných?",
+        photo: 'obrazky/superhero.png',
+        answers: ["Batman", "Ant-man", "Iron Man", "Spider-man"],
         correctAnswerIndex: 0
     },
     {
-        question: "aaaa?",
-        photo: 'obrazky/ovoce.jpg',
-        answers: ["d", "correct2", "f"],
+        question: "Koľko členov malo Spoločenstvo Prsteňa?",
+        photo: 'obrazky/LOTR.png',
+        answers: ["7", "8", "9", "Máš na mysli užitočných členov alebo všetkých? Pretože ak užitočných, tak jedného - Sama"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Aké je Voldemortovo krstné meno?",
+        photo: 'obrazky/Voldemort.png',
+        answers: ["Fungus", "Tom", "Jonathan", "Maggie"],
         correctAnswerIndex: 1
+    },
+    {
+        question: "Prečo chcel Thanos vyhubiť polovicu živých tvorov?",
+        photo: 'obrazky/Thanos.png',
+        answers: ["Pretože mu ukradli Bárbínu.", "Z hecu.", "Marthaaaaa.", "Shhhh... No spoilers!"],
+        correctAnswerIndex: 3
     }
 ];
 
@@ -115,7 +127,7 @@ function setEvaluationHeader() {
     evaluation = document.createElement("div");
     evalHeader = document.createElement("h2");
     evaluation.setAttribute("class", "vysledek");
-    evalHeader.innerHTML = "Tvoje hodnocení";
+    evalHeader.innerHTML = "Tvoje hodnotenie";
     evaluation.appendChild(evalHeader);
     quiz.appendChild(evaluation);
 };
@@ -138,13 +150,13 @@ function setEvaluationBody() {
         correctAnswer.setAttribute("class", "vysledekOdpoved");
 
         evalQuestion.innerHTML = `${i + 1}. ${otazka}`;
-        yourAnswer.innerHTML = `Tvoje odpověď: ${tvojeOdpoved}`;
+        yourAnswer.innerHTML = `Tvoja odpoveď: ${tvojeOdpoved}`;
 
         if (tvojeOdpoved === spravnaOdpoved) {
-            correctAnswer.innerHTML = "To je SPRÁVNĚ.";
+            correctAnswer.innerHTML = "To je SPRÁVNE.";
             correctAnswersNumber++;
         } else {
-            correctAnswer.innerHTML = `Správná odpověď: ${spravnaOdpoved}`;
+            correctAnswer.innerHTML = `Správna odpoveď: ${spravnaOdpoved}`;
         };
 
         evalBody.appendChild(evalQuestion);
@@ -157,6 +169,6 @@ function setEvaluationBody() {
 function setEvaluationFooter() {
     let resultPercent = (correctAnswersNumber / questionsNumber) * 100;
     totalResult = document.createElement("h2");
-    totalResult.innerHTML = `Správně ${correctAnswersNumber} ze ${questionsNumber} otázek, úspěšnost ${resultPercent} %.`;
+    totalResult.innerHTML = `Správne ${correctAnswersNumber} zo ${questionsNumber} otázok, úspešnosť ${resultPercent} %.`;
     evaluation.appendChild(totalResult);
 }
