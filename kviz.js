@@ -97,29 +97,30 @@ function setAnswer(i, quizAnswersSet) {
     };
 };
 
-function clearPage() {
-    quiz = document.querySelector(".kviz");
-    while (quiz.firstChild) {
-        quiz.removeChild(quiz.firstChild);
-    };
-
-};
-
 function goToOtherPage(event) {
-    let target = event.target;
-    let parent = target.parentNode;
-    let index = [].indexOf.call(parent.children, target);
-    yourAnswers.push(index);
-
+    addYourAnswerToSet(event);
     i++;
     clearPage();
-
     if (i < questionsNumber) {
         setQuizPage(i);
     } else {
         setEvaluationHeader();
         setEvaluationBody();
         setEvaluationFooter();
+    };
+};
+
+function addYourAnswerToSet(event) {
+    let target = event.target;
+    let parent = target.parentNode;
+    let index = [].indexOf.call(parent.children, target);
+    yourAnswers.push(index);
+};
+
+function clearPage() {
+    quiz = document.querySelector(".kviz");
+    while (quiz.firstChild) {
+        quiz.removeChild(quiz.firstChild);
     };
 };
 
