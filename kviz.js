@@ -15,39 +15,57 @@ let questions = [
     }
 ];
 
-let i = 0;
 const questionsNumber = questions.length;
-setQuizPage(i);
 
-function setQuizPage(i) {
+let quizHeaderBody, quizHeader, quizBody;
+let fotoElement, obrazekImg;
+let moznostiDiv, odpovediUl, answerLi;
+let quiz;
 
-    let questionPartH2 = document.createElement("h2");
-    let headerPoradi = document.createElement("div");
-    headerPoradi.setAttribute("id", "poradi");
-    headerPoradi.innerHTML = `Otázka ${i + 1}/${questionsNumber}`;
-    let questionOtazka = document.createElement("div");
+let i = 0;
+setQuizPage();
+
+function setQuizPage() {
+    setQuizHeaderBody();
+    setImage();
+    setAnswers();
+    appendAllToQuiz();
+};
+
+function setQuizHeaderBody() {
     let questionText = questions[i].question;
-    questionOtazka.setAttribute("id", "otazka");
-    questionOtazka.innerHTML = questionText;
-    questionPartH2.appendChild(headerPoradi);
-    questionPartH2.appendChild(questionOtazka);
+    quizHeaderBody = document.createElement("h2");
+    quizHeader = document.createElement("div");
+    quizBody = document.createElement("div");
+    quizHeader.setAttribute("id", "poradi");
+    quizBody.setAttribute("id", "otazka");
+    quizHeader.innerHTML = `Otázka ${i + 1}/${questionsNumber}`;
+    quizBody.innerHTML = questionText;    
+    quizHeaderBody.appendChild(quizHeader);
+    quizHeaderBody.appendChild(quizBody);
+};
 
-    let photoPartFoto = document.createElement("foto");
-    let obrazekImg = document.createElement("img");
+function setImage() {    
+    fotoElement = document.createElement("foto");
+    obrazekImg = document.createElement("img");    
     obrazekImg.setAttribute("id", "obrazek");
     obrazekImg.src = questions[i].photo;
-    photoPartFoto.appendChild(obrazekImg);
+    fotoElement.appendChild(obrazekImg);
+};
 
-    let moznostiDiv = document.createElement("div");
+function setAnswers() {    
+    moznostiDiv = document.createElement("div");
     moznostiDiv.setAttribute("id", "moznosti");
-    let odpovediUl = document.createElement("ul");
+    odpovediUl = document.createElement("ul");
     odpovediUl.setAttribute("id", "odpovedi");
     moznostiDiv.appendChild(odpovediUl)
     setAnswer(i, odpovediUl)
+};
 
-    let quiz = document.querySelector(".kviz");
-    quiz.appendChild(questionPartH2);
-    quiz.appendChild(photoPartFoto);
+function appendAllToQuiz() {
+    quiz = document.querySelector(".kviz");
+    quiz.appendChild(quizHeaderBody);
+    quiz.appendChild(fotoElement);
     quiz.appendChild(moznostiDiv);
 };
 
@@ -55,7 +73,7 @@ function setAnswer(i, odpovediUl) {
     let answerText;
     for (let j = 0; j < questions[i].answers.length; j++) {
         answerText = questions[i].answers[j];
-        let answerLi = document.createElement("li");
+        answerLi = document.createElement("li");
         answerLi.setAttribute("data-odpoved", j.toString());
         answerLi.innerHTML = answerText;
         odpovediUl.appendChild(answerLi);
@@ -67,7 +85,6 @@ function goToOtherPage() {
     i++;
     clearPage();
     if (i < questionsNumber) {
-        // reapply all
         setQuizPage(i);
     } else {
         console.log("hey");
@@ -81,18 +98,6 @@ function clearPage() {
     };
 };
 
-/*
-Při vytváření HTML pro odpovědi dodrž následující strukturu:
-
-<ul id="odpovedi">
-    <li data-odpoved="0">Ledová královna</li>
-    <li data-odpoved="1">Sněhurka</li>
-    <li data-odpoved="2">Já, já jsem nejkrásnější!</li>
-</ul>
-
-Takto připravené HTML pak pokaždé vlož na stránce do <div id="moznosti">
-Musíš nejprve smazat ten starý seznam, který už tam je.
-*/
 
 /*
 SUPERKVÍZ - cílem je naprogramovat klasický kvíz.
@@ -102,9 +107,3 @@ Když odpoví na všechny otázky, ukáže se jí hodnocení úspěšnosti v pro
 a pod tím seznam s výsledkem.
 V seznamu bude vždy otázka, její odpověď a správná odpověď.
 */
-
-/*
-TODO
-- možnosti - aby zaplnili šírku tým šedivým. Flex? nefunguje...
-*/
-
