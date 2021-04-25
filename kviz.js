@@ -23,18 +23,18 @@ let quizOptions, quizAnswersSet, quizAnswer;
 let quiz;
 
 let i = 0;
-setQuizPage();
+setQuizPage(i);
 
 
 
-function setQuizPage() {
-    setQuizHeaderBody();
-    setImage();
-    setAnswers();
-    appendAllToQuiz();
+function setQuizPage(i) {
+    setQuizHeader(i);
+    setQuizImage(i);
+    setQuizAnswers(i);
+    appendAllToQuiz(i);
 };
 
-function setQuizHeaderBody() {
+function setQuizHeader(i) {
     let questionText = questions[i].question;
     quizHeader = document.createElement("h2");
     quizOrder = document.createElement("div");
@@ -47,7 +47,7 @@ function setQuizHeaderBody() {
     quizHeader.appendChild(quizQuestion);
 };
 
-function setImage() {    
+function setQuizImage(i) {    
     quizFotoElement = document.createElement("foto");
     quizImage = document.createElement("img");    
     quizImage.setAttribute("id", "obrazek");
@@ -55,7 +55,7 @@ function setImage() {
     quizFotoElement.appendChild(quizImage);
 };
 
-function setAnswers() {    
+function setQuizAnswers(i) {    
     quizOptions = document.createElement("div");
     quizOptions.setAttribute("id", "moznosti");
     quizAnswersSet = document.createElement("ul");
@@ -71,14 +71,14 @@ function appendAllToQuiz() {
     quiz.appendChild(quizOptions);
 };
 
-function setAnswer(i, odpovediUl) {
+function setAnswer(i, quizAnswersSet) {
     let answerText;
     for (let j = 0; j < questions[i].answers.length; j++) {
         answerText = questions[i].answers[j];
         quizAnswer = document.createElement("li");
         quizAnswer.setAttribute("data-odpoved", j.toString());
         quizAnswer.innerHTML = answerText;
-        odpovediUl.appendChild(quizAnswer);
+        quizAnswersSet.appendChild(quizAnswer);
         quizAnswer.addEventListener("click", goToOtherPage);
     };
 };
