@@ -15,12 +15,15 @@ let questions = [
     }
 ];
 
+let yourAnswers = [];
+
 const questionsNumber = questions.length;
 
 let quizHeader, quizOrder, quizQuestion;
 let quizFotoElement, quizImage;
 let quizOptions, quizAnswersSet, quizAnswer;
 let quiz;
+let evaluation, evaluationHeader, evaluationBody, evaluationQuestion, evaluationAnswer, evaluationResult;
 
 let i = 0;
 setQuizPage(i);
@@ -42,20 +45,20 @@ function setQuizHeader(i) {
     quizOrder.setAttribute("id", "poradi");
     quizQuestion.setAttribute("id", "otazka");
     quizOrder.innerHTML = `Otázka ${i + 1}/${questionsNumber}`;
-    quizQuestion.innerHTML = questionText;    
+    quizQuestion.innerHTML = questionText;
     quizHeader.appendChild(quizOrder);
     quizHeader.appendChild(quizQuestion);
 };
 
-function setQuizImage(i) {    
+function setQuizImage(i) {
     quizFotoElement = document.createElement("foto");
-    quizImage = document.createElement("img");    
+    quizImage = document.createElement("img");
     quizImage.setAttribute("id", "obrazek");
     quizImage.src = questions[i].photo;
     quizFotoElement.appendChild(quizImage);
 };
 
-function setQuizAnswers(i) {    
+function setQuizAnswers(i) {
     quizOptions = document.createElement("div");
     quizOptions.setAttribute("id", "moznosti");
     quizAnswersSet = document.createElement("ul");
@@ -83,22 +86,41 @@ function setAnswer(i, quizAnswersSet) {
     };
 };
 
-function goToOtherPage() {
-    i++;
-    clearPage();
-    if (i < questionsNumber) {
-        setQuizPage(i);
-    } else {
-        console.log("hey");
-    };
-};
-
-function clearPage() {    
+function clearPage() {
     quiz = document.querySelector(".kviz");
     while (quiz.firstChild) {
         quiz.removeChild(quiz.firstChild);
     };
+
 };
+
+function setEvaluationHeader() {
+    evaluation = document.createElement("div");
+    evaluation.setAttribute("class", "vysledek");
+    evaluationHeader = document.createElement("h2");
+    evaluationHeader.innerHTML = "Tvoje hodnocení";
+    evaluation.appendChild(evaluationHeader);
+    quiz.appendChild(evaluation);
+};
+
+function goToOtherPage(event) {
+    let target = event.target;
+    let parent = target.parentNode;
+    let index = [].indexOf.call(parent.children, target);
+    yourAnswers.push(index);
+
+    i++;
+    clearPage();
+
+    if (i < questionsNumber) {
+        setQuizPage(i);
+    } else {
+        setEvaluationHeader()
+
+    };
+};
+
+
 
 
 /*

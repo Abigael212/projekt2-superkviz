@@ -33,17 +33,19 @@ h1 {
 	letter-spacing: 5px;
 }
 
-.kviz,
-.vysledek {
-	margin: 30px auto;
+.kviz, .vysledek {
 	padding: 20px;
 	width: 800px;
 	min-height: 400px;
 	background-color: white;
 	color: black;
 	border-radius: 10px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 	display: table;
+}
+
+.kviz {
+	margin: 30px auto;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 #poradi {
@@ -109,9 +111,8 @@ h1 {
 	transform: translateX(-10px);
 }
 
-
 .vysledek {
-	display: none;
+	margin: 10px auto;
 }
 
 .vysledek h2 {
