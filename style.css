@@ -43,6 +43,7 @@ h1 {
 	color: black;
 	border-radius: 10px;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+	display: table;
 }
 
 #poradi {
@@ -86,10 +87,10 @@ h1 {
 
 #odpovedi {
 	margin: 0;
-	padding: 0;
+	padding-left: 10;
 	font-size: 20px;
 	list-style: none;
-	float:right
+	overflow: auto;
 }
 
 #odpovedi li {
