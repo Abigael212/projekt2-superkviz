@@ -1,21 +1,20 @@
-// Data pro kvíz jsou uložena v poli otazky. Každa otázka je objekt, který obsahuje 
-// otázku,  obrázek k otázce, pole možných odpovědí a index správné odpovědi.
 let questions = [
     {
         question: "hejheHHH1?",
         photo: 'obrazky/moncicak.jpg',
-        answers: ["assssssssssssssssssss", "b", "c", "g"],
+        answers: ["correct1", "b", "c", "g"],
         correctAnswerIndex: 0
     },
     {
-        question: "sdhsghgsafa2?",
+        question: "aaaa?",
         photo: 'obrazky/ovoce.jpg',
-        answers: ["d", "e", "f"],
+        answers: ["d", "correct2", "f"],
         correctAnswerIndex: 1
     }
 ];
 
 let yourAnswers = [];
+let correctAnswersNumber = 0;
 
 const questionsNumber = questions.length;
 
@@ -23,7 +22,7 @@ let quizHeader, quizOrder, quizQuestion;
 let quizFotoElement, quizImage;
 let quizOptions, quizAnswersSet, quizAnswer;
 let quiz;
-let evaluation, evaluationHeader, evaluationBody, evaluationQuestion, evaluationAnswer, evaluationResult;
+let evaluation, evalHeader, evalBody, evalQuestion, yourAnswer, correctAnswer, totalResult;
 
 let i = 0;
 setQuizPage(i);
@@ -94,15 +93,6 @@ function clearPage() {
 
 };
 
-function setEvaluationHeader() {
-    evaluation = document.createElement("div");
-    evaluation.setAttribute("class", "vysledek");
-    evaluationHeader = document.createElement("h2");
-    evaluationHeader.innerHTML = "Tvoje hodnocení";
-    evaluation.appendChild(evaluationHeader);
-    quiz.appendChild(evaluation);
-};
-
 function goToOtherPage(event) {
     let target = event.target;
     let parent = target.parentNode;
@@ -115,19 +105,58 @@ function goToOtherPage(event) {
     if (i < questionsNumber) {
         setQuizPage(i);
     } else {
-        setEvaluationHeader()
-
+        setEvaluationHeader();
+        setEvaluationBody();
+        setEvaluationFooter();
     };
 };
 
+function setEvaluationHeader() {
+    evaluation = document.createElement("div");
+    evalHeader = document.createElement("h2");
+    evaluation.setAttribute("class", "vysledek");
+    evalHeader.innerHTML = "Tvoje hodnocení";
+    evaluation.appendChild(evalHeader);
+    quiz.appendChild(evaluation);
+};
 
+function setEvaluationBody() {
+    for (let i = 0; i < questionsNumber; i++) {
+        let yourAnswerIndex = yourAnswers[i];
+        let correctAnswerIndex = questions[i].correctAnswerIndex;
+        let otazka = questions[i].question;
+        let tvojeOdpoved = questions[i].answers[yourAnswerIndex];
+        let spravnaOdpoved = questions[i].answers[correctAnswerIndex];
 
+        evalBody = document.createElement("div");
+        evalQuestion = document.createElement("div");
+        yourAnswer = document.createElement("div");
+        correctAnswer = document.createElement("div");
 
-/*
-SUPERKVÍZ - cílem je naprogramovat klasický kvíz.
-Tj. uživatelce se postupně ukazují otázky a u každé má na výběr z několika možných odpovědí.
-Když na jednu odpověď klikne,  posune se na další otázku.
-Když odpoví na všechny otázky, ukáže se jí hodnocení úspěšnosti v procentech
-a pod tím seznam s výsledkem.
-V seznamu bude vždy otázka, její odpověď a správná odpověď.
-*/
+        evalQuestion.setAttribute("class", "vysledekOtazky");
+        yourAnswer.setAttribute("class", "vysledekOdpoved");
+        correctAnswer.setAttribute("class", "vysledekOdpoved");
+
+        evalQuestion.innerHTML = `${i + 1}. ${otazka}`;
+        yourAnswer.innerHTML = `Tvoje odpověď: ${tvojeOdpoved}`;
+
+        if (tvojeOdpoved === spravnaOdpoved) {
+            correctAnswer.innerHTML = "To je SPRÁVNĚ.";
+            correctAnswersNumber++;
+        } else {
+            correctAnswer.innerHTML = `Správná odpověď: ${spravnaOdpoved}`;
+        };
+
+        evalBody.appendChild(evalQuestion);
+        evalBody.appendChild(yourAnswer);
+        evalBody.appendChild(correctAnswer);
+        evaluation.appendChild(evalBody);
+    };
+};
+
+function setEvaluationFooter() {
+    let resultPercent = (correctAnswersNumber / questionsNumber) * 100;
+    totalResult = document.createElement("h2");
+    totalResult.innerHTML = `Správně ${correctAnswersNumber} ze ${questionsNumber} otázek, úspěšnost ${resultPercent} %.`;
+    evaluation.appendChild(totalResult);
+}

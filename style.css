@@ -33,6 +33,10 @@ h1 {
 	letter-spacing: 5px;
 }
 
+h2 {
+	margin: 10px 0;
+}
+
 .kviz, .vysledek {
 	padding: 20px;
 	width: 800px;
@@ -111,12 +115,18 @@ h1 {
 	transform: translateX(-10px);
 }
 
-.vysledek {
-	margin: 10px auto;
-}
-
 .vysledek h2 {
-	margin-top: 0;
 	font-size: 36px;
 	color: var(--cervena);
+}
+
+.vysledekOtazky {
+	font-family: 'Bangers', cursive;
+	margin: 20px 0 20px 0;
+	font-size: 18px;
+}
+
+.vysledekOdpoved {
+	margin: 20px 0 20px 0;
+	line-height: 1.2;
 }
